@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAM Prompt Testing Agent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .loading {
+            display: none;
+        }
+        .result-card {
+            margin-top: 1rem;
+        }
+        .quality-score {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .score-excellent { color: #27ae60; }
+        .score-good { color: #f39c12; }
+        .score-poor { color: #e74c3c; }
+        .company-option {
+            cursor: pointer;
+            padding: 0.75rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .company-option:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-color: #2196f3;
+            transform: translateX(5px);
+        }
+        .company-option.selected {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-color: #4caf50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .section-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .section-present { background-color: #27ae60; }
+        .section-missing { background-color: #e74c3c; }
+        .tam-metric {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.25rem;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        .progress-custom {
+            height: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+        }
+        .progress-bar-custom {
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .nav-pills .nav-link {
+            border-radius: 25px;
+            margin: 0 0.25rem;
+        }
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <div class="mb-4">
+                        <img src="/static/thumbnail_company_logo.png" alt="Company Logo" class="img-fluid" style="max-height: 80px; filter: brightness(0) invert(1);">
+                    </div>
+                    <h1 class="display-3 mb-4">
+                        <i class="fas fa-chart-line me-3"></i>
+                        TAM Prompt Testing Agent
+                    </h1>
+                    <p class="lead mb-4">
+                        Advanced AI-powered testing for Total Addressable Market (TAM) estimation models
+                    </p>
+                    <div class="mb-3">
+                        <a href="/" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-chart-line me-2"></i>
+                            TAM Analysis
+                        </a>
+                        <a href="/dcf" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-calculator me-2"></i>
+                            DCF Analysis
+                        </a>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="badge bg-light text-dark fs-6 p-3">
+                                <i class="fas fa-chart-line me-2"></i>
+                                Market Size Analysis | 
+                                <i class="fas fa-users me-2"></i>
+                                Customer Segmentation | 
+                                <i class="fas fa-globe me-2"></i>
+                                Geographic Expansion
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- TAM Test Section -->
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <h4 class="mb-0">
+                            <i class="fas fa-flask me-2"></i>
+                            TAM Model Test
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="singleTestForm">
+                            <div class="mb-4">
+                                <label for="modelChoice" class="form-label fw-bold">Select AI Model</label>
+                                <select class="form-select form-select-lg" id="modelChoice" name="model_choice" required>
+                                    <option value="qwen">Qwen2.5 VL 32B (Free)</option>
+                                    <option value="gemini">Gemini 1.5 Pro (Free)</option>
+                                </select>
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <strong>Qwen:</strong> Good for market analysis | 
+                                        <strong>Gemini:</strong> Excellent for comprehensive TAM models
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="companyContext" class="form-label fw-bold">Company Context</label>
+                                <textarea 
+                                    class="form-control form-control-lg" 
+                                    id="companyContext" 
+                                    name="company_context" 
+                                    rows="4" 
+                                    placeholder="Describe the company for TAM analysis (e.g., business model, target market, industry, key metrics)..."
+                                    required
+                                ></textarea>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Or select from predefined company types:</label>
+                                <div id="companyOptions" style="max-height: 250px; overflow-y: auto;">
+                                    <div class="company-option" onclick="selectCompany('A SaaS company targeting small and medium businesses in the healthcare sector')">
+                                        <i class="fas fa-cloud me-2"></i>
+                                        SaaS Company (Healthcare SMB)
+                                    </div>
+                                    <div class="company-option" onclick="selectCompany('A fintech startup focused on mobile payments in emerging markets')">
+                                        <i class="fas fa-credit-card me-2"></i>
+                                        Fintech Startup (Mobile Payments)
+                                    </div>
+                                    <div class="company-option" onclick="selectCompany('An e-commerce platform specializing in sustainable consumer goods')">
+                                        <i class="fas fa-shopping-cart me-2"></i>
+                                        E-commerce Platform (Sustainable Goods)
+                                    </div>
+                                    <div class="company-option" onclick="selectCompany('A B2B software company serving the manufacturing industry')">
+                                        <i class="fas fa-industry me-2"></i>
+                                        B2B Software (Manufacturing)
+                                    </div>
+                                    <div class="company-option" onclick="selectCompany('A direct-to-consumer brand in the personal care and beauty sector')">
+                                        <i class="fas fa-heart me-2"></i>
+                                        D2C Brand (Beauty & Personal Care)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="verbose" name="verbose">
+                                <label class="form-check-label fw-bold" for="verbose">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Detailed Analysis Mode
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-rocket me-2"></i>
+                                Run TAM Analysis
+                            </button>
+                        </form>
+                        
+                        <!-- Loading indicator -->
+                        <div class="loading text-center mt-4">
+                            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-3 fs-5">Analyzing TAM model...</p>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+                            </div>
+                            <small class="text-muted mt-2 d-block">This usually takes 30-60 seconds</small>
+                        </div>
+                        
+                        <!-- Results -->
+                        <div id="singleResults" class="result-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAM Requirements Panel -->
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list-check me-2"></i>
+                            TAM Requirements
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Required Sections:</h6>
+                            <div id="requiredSections">
+                                <div><span class="section-indicator section-present"></span>Market Definition</div>
+                                <div><span class="section-indicator section-present"></span>Market Size Calculation</div>
+                                <div><span class="section-indicator section-present"></span>Customer Segmentation</div>
+                                <div><span class="section-indicator section-present"></span>Geographic Analysis</div>
+                                <div><span class="section-indicator section-present"></span>Growth Projections</div>
+                                <div><span class="section-indicator section-present"></span>Market Penetration</div>
+                                <div><span class="section-indicator section-present"></span>Competitive Landscape</div>
+                                <div><span class="section-indicator section-present"></span>Key Assumptions</div>
+                                <div><span class="section-indicator section-present"></span>Summary & Insights</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Key Market Elements:</h6>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small>• Total Market Size</small><br>
+                                    <small>• Serviceable Market</small><br>
+                                    <small>• Addressable Market</small><br>
+                                    <small>• Customer Segments</small><br>
+                                    <small>• Geographic Scope</small>
+                                </div>
+                                <div class="col-6">
+                                    <small>• Market Growth Rate</small><br>
+                                    <small>• Penetration Strategy</small><br>
+                                    <small>• Competitive Analysis</small><br>
+                                    <small>• Market Trends</small><br>
+                                    <small>• Risk Factors</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> TAM analysis requires comprehensive market research with clear segmentation, growth projections, and competitive positioning.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                        <h5 class="mb-0">
+                            <i class="fas fa-download me-2"></i>
+                            Export TAM Results
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Download comprehensive TAM test results and analysis reports.</p>
+                        <button type="button" class="btn btn-info" onclick="exportResults()">
+                            <i class="fas fa-file-download me-2"></i>
+                            Export TAM Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectCompany(company) {
+            document.getElementById('companyContext').value = company;
+            
+            // Update visual selection
+            document.querySelectorAll('.company-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+        }
+
+        function getScoreClass(score) {
+            if (score >= 0.8) return 'score-excellent';
+            if (score >= 0.6) return 'score-good';
+            return 'score-poor';
+        }
+
+        function formatResults(data) {
+            const scoreClass = getScoreClass(data.quality_score);
+            const modelName = data.model_used === 'gemini' ? 'Gemini 1.5 Pro' : 'Qwen2.5 VL 32B';
+            const modelBadge = data.model_used === 'gemini' ? 'bg-success' : 'bg-info';
+            
+            return `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="mb-0">TAM Analysis Results</h4>
+                            <span class="badge ${modelBadge} fs-6">${modelName}</span>
+                        </div>
+                        
+                        <!-- Quality Score -->
+                        <div class="text-center mb-4">
+                            <div class="quality-score ${scoreClass}">${(data.quality_score * 100).toFixed(1)}%</div>
+                            <p class="text-muted">Overall TAM Quality Score</p>
+                        </div>
+                        
+                        <!-- Key Metrics -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="metric-card text-center">
+                                    <div class="metric-value">${data.response_length.toLocaleString()}</div>
+                                    <small>Characters</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card text-center">
+                                    <div class="metric-value">${(data.validation_scores.section_coverage * 100).toFixed(0)}%</div>
+                                    <small>Section Coverage</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card text-center">
+                                    <div class="metric-value">${(data.validation_scores.element_coverage * 100).toFixed(0)}%</div>
+                                    <small>Element Coverage</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="metric-card text-center">
+                                    <div class="metric-value">${data.validation_scores.market_metrics_count || 0}</div>
+                                    <small>Market Metrics</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Bars -->
+                        <div class="mb-4">
+                            <h6>TAM Analysis Completeness</h6>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Market Calculations</span>
+                                    <span>${data.validation_scores.has_calculations ? '✓' : '✗'}</span>
+                                </div>
+                                <div class="progress progress-custom">
+                                    <div class="progress-bar progress-bar-custom" style="width: ${data.validation_scores.has_calculations ? 100 : 0}%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Market Tables</span>
+                                    <span>${data.validation_scores.has_tables ? '✓' : '✗'}</span>
+                                </div>
+                                <div class="progress progress-custom">
+                                    <div class="progress-bar progress-bar-custom" style="width: ${data.validation_scores.has_tables ? 100 : 0}%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Customer Segmentation</span>
+                                    <span>${data.validation_scores.has_segmentation ? '✓' : '✗'}</span>
+                                </div>
+                                <div class="progress progress-custom">
+                                    <div class="progress-bar progress-bar-custom" style="width: ${data.validation_scores.has_segmentation ? 100 : 0}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Market Metrics -->
+                        ${data.market_metrics && Object.keys(data.market_metrics).length > 0 ? `
+                            <div class="mb-4">
+                                <h6>Market Metrics Detected</h6>
+                                <div>
+                                    ${Object.entries(data.market_metrics).map(([metric, values]) => 
+                                        values && values.length > 0 ? `<span class="tam-metric">${metric}: ${values.length}</span>` : ''
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <!-- Missing Requirements -->
+                        ${data.missing_requirements.length > 0 ? `
+                            <div class="mb-4">
+                                <h6 class="text-warning">Missing Requirements (${data.missing_requirements.length})</h6>
+                                <div class="alert alert-warning">
+                                    <ul class="mb-0">
+                                        ${data.missing_requirements.slice(0, 5).map(req => `<li>${req}</li>`).join('')}
+                                        ${data.missing_requirements.length > 5 ? `<li>... and ${data.missing_requirements.length - 5} more</li>` : ''}
+                                    </ul>
+                                </div>
+                            </div>
+                        ` : '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>All TAM requirements met!</div>'}
+                        
+                        <!-- Recommendations -->
+                        ${data.recommendations.length > 0 ? `
+                            <div class="mb-4">
+                                <h6>Recommendations</h6>
+                                <div class="alert alert-info">
+                                    <ul class="mb-0">
+                                        ${data.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                         <!-- Full Response -->
+                         <div class="mt-4">
+                             <h6>Complete TAM Analysis</h6>
+                             <div class="bg-light p-4 rounded" style="max-height: 600px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4;">
+                                 ${data.response_preview}
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        // Single test form submission
+        document.getElementById('singleTestForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const loading = document.querySelector('.loading');
+            const results = document.getElementById('singleResults');
+            
+            loading.style.display = 'block';
+            results.innerHTML = '';
+            
+            try {
+                const response = await fetch('/test-single', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    results.innerHTML = formatResults(data.result);
+                } else {
+                    results.innerHTML = `<div class="alert alert-danger">Error: ${data.detail}</div>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+
+        // Export results
+        async function exportResults() {
+            try {
+                const response = await fetch('/export-results');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `tam_test_results_${new Date().toISOString().split('T')[0]}.json`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                } else {
+                    alert('Error exporting results: ' + data.detail);
+                }
+            } catch (error) {
+                alert('Error exporting results: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

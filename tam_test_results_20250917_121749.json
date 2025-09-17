@@ -1,0 +1,40 @@
+[
+  {
+    "test_id": "test_1758100669",
+    "timestamp": "2025-09-17T12:17:49.552979",
+    "quality_score": 0.0,
+    "validation_scores": {
+      "section_coverage": 0.0,
+      "element_coverage": 0.0,
+      "response_length": 66,
+      "has_calculations": false,
+      "has_tables": false
+    },
+    "missing_requirements": [
+      "Missing section: Opening Overview",
+      "Missing section: Bottom-Up Analysis",
+      "Missing section: Top-Down Analysis",
+      "Missing section: Hybrid Analysis",
+      "Missing section: Market Capture Analysis",
+      "Missing section: Final Deliverables",
+      "Missing element: market_size",
+      "Missing element: confidence_intervals",
+      "Missing element: methodology",
+      "Missing element: customer_segments",
+      "Missing element: acv_ltv",
+      "Missing element: penetration_rate",
+      "Missing element: sources",
+      "Missing element: sensitivity",
+      "Missing element: revenue_projection",
+      "Missing element: constraints_enablers"
+    ],
+    "recommendations": [
+      "Consider adding more explicit section headers to guide the LLM",
+      "Add more specific examples of required elements in the prompt",
+      "Prompt should explicitly request numerical calculations and formulas",
+      "Consider requesting structured table outputs for better organization",
+      "Prompt may be too complex - consider breaking into smaller, focused sections"
+    ],
+    "response_length": 66
+  }
+]

@@ -1,0 +1,114 @@
+﻿
+Valuation Analysis Framework (10-Year DCF)
+
+Model Construction Requirements
+Build a conservative 10-year DCF with explicit terminal value calculation. Document all major inputs with clear rationale and source attribution.
+
+Key Input Documentation:
+• Customer Growth: Historical acquisition rates, churn analysis, market penetration assumptions
+• Lifetime Value (LTV): Customer segmentation, pricing models, retention curves, upsell/cross-sell assumptions  
+• Margin Evolution: Historical margin trends, operational leverage, scale economics, competitive dynamics
+• Capital Requirements: Working capital needs, CapEx requirements, financing assumptions
+
+Show how these drivers flow through to the three statements and free cash flow.
+
+Required Output Tables
+
+1. DCF Summary Table (5 historical + 10 projected years):
+Year | Revenue | FCF | Discounted FCF | Terminal Value | Equity Value | Per-Share Value
+[Years] | [USD] | [USD] | [USD] | [USD] | [USD] | [USD]
+
+2. WACC Calculation Table:
+Component | Cost | Weight | Weighted Cost | Justification
+Cost of Equity | X% | Y% | Z% | [Methodology & Assumptions]
+Cost of Debt | X% | Y% | Z% | [Credit Rating & Market Rates]
+WACC | X% | 100% | X% | [Blended Cost of Capital]
+
+3. FX Devaluation Premium (if applicable):
+• Document any currency risk adjustments for emerging market companies
+• Explain methodology and provide sensitivity analysis
+
+Historical Benchmarking
+Growth Rate Analysis:
+• Compare projected 10-year CAGRs with historical 5-year averages
+• Benchmark terminal growth assumptions against industry precedents
+• Identify where assumptions exceed historical ranges with clear justification
+• Flag any assumptions that appear aggressive relative to industry norms
+
+Scenario Analysis
+
+1. Bull/Base/Bear Cases (using same WACC and terminal growth):
+• Bull Case: Optimistic assumptions for key growth drivers
+• Base Case: Conservative, realistic assumptions
+• Bear Case: Pessimistic scenario with downside risks
+• Present valuation ranges for each scenario
+
+2. Sensitivity Analysis:
+• Key Metric CAGRs: ±20% changes in revenue, margin, and customer growth assumptions
+• WACC/Terminal Growth: ±100bps changes in WACC and ±50bps in terminal growth
+• Create sensitivity tables showing impact on equity value per share
+
+Three-Statement Model Requirements (200-300 words)
+
+Income Statement Projections (10 years)
+Key Line Items:
+• Revenue by segment/product line with growth drivers
+• Cost of Goods Sold with margin evolution
+• Operating expenses (SG&A, R&D) with leverage assumptions
+• Interest expense and other income/expense
+• Tax rate with jurisdictional considerations
+• Net income and EPS calculations
+
+Balance Sheet Projections (10 years)
+Key Line Items:
+• Working capital components (AR, AP, Inventory) with turnover ratios
+• Property, Plant & Equipment with CapEx and depreciation schedules
+• Intangible assets and goodwill treatment
+• Debt structure with maturity schedules
+• Equity components (common stock, retained earnings, other equity)
+• Cash and cash equivalents with minimum operating requirements
+
+Cash Flow Statement Projections (10 years)
+Key Line Items:
+• Operating cash flow reconciliation to net income
+• CapEx requirements with growth and maintenance components
+• Working capital changes with business cycle considerations
+• Debt issuance/repayment schedules
+• Dividend payments and share repurchases
+• Free cash flow calculation and reconciliation
+
+Reconciliation Checks
+Critical Validations:
+• Cash flow statement balances to balance sheet cash changes
+• Depreciation expense matches balance sheet accumulated depreciation
+• Interest expense reconciles with debt balances and rates
+• Tax expense aligns with pre-tax income and tax rates
+• Working capital changes flow through all three statements consistently
+
+Key Value Drivers
+Identify and Quantify:
+• Top 3-5 line items that drive the largest valuation swings
+• Sensitivity analysis for each key driver
+• Scenario impact on overall valuation
+• Risk factors that could materially affect projections
+
+Excel Output Requirement
+Deliver: DCF_Model_[Company].xlsx with:
+• Formula-driven calculations (no hardcoded-only values)
+• Linked three statements so changes in assumptions flow through to valuation outputs
+• Separate worksheets for: Assumptions, Income Statement, Balance Sheet, Cash Flow, DCF Summary, Sensitivity Analysis
+• Data validation and error checking formulas
+• Professional formatting with clear navigation
+
+Final Deliverables
+
+1. 10-year DCF model with terminal value
+2. Complete three-statement projections (base case, GAAP conventions)
+3. WACC calculation with component breakdown
+4. Bull/base/bear scenario analysis
+5. Sensitivity analysis tables
+6. Historical benchmarking analysis
+7. Key assumptions documentation
+8. Excel model with linked formulas and data validation
+
+Format: Present as a comprehensive valuation report with clear sections, professional tables, and actionable investment insights suitable for institutional investors.

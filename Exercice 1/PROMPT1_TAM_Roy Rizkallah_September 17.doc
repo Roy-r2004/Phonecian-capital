@@ -1,0 +1,88 @@
+﻿ 
+(TAM) Estimation Prompt
+
+
+Opening Overview (Required)
+Start with a concise 2-3 paragraph summary that:
+• Market Size: State overall market size in USD with confidence intervals
+• TAM Methods: Outline the 2-3 methodologies you'll employ and why each is appropriate
+• Core Objective: Clearly state the goal - determining plausible market capture potential
+• Business Context: Anchor in company's industry, customer segments, and business model
+
+Methodology Framework
+
+Method 1: Bottom-Up Analysis
+Why This Method: Appropriate for companies with clear customer segments and pricing models
+Uncertainties: Customer count accuracy, pricing sustainability, penetration assumptions
+
+Required Analysis:
+• Identify distinct customer segments (enterprise, SMB, consumer, geographic)
+• Estimate average customer value (ACV) or lifetime value (LTV) per segment
+• Calculate total addressable customers in each segment
+• Apply penetration rate assumptions based on company's current position
+• TAM Estimate: State USD figure and label as "Bottom-Up Method"
+• Calculation Steps: Show step-by-step math with key metrics
+• Sources: Reference specific filings, industry reports, independent research
+• Assumptions: Document all key assumptions with rationale
+• Sensitivity: Test ±20% changes in customer count and pricing
+
+Method 2: Top-Down Analysis
+Why This Method: Appropriate for validating market size against industry benchmarks
+Uncertainties: Market definition, filtering criteria, addressable portion accuracy
+
+Required Analysis:
+• Start with total market size from authoritative sources (Gartner, IDC, McKinsey)
+• Apply relevant filters (geographic, demographic, technological, regulatory)
+• Calculate addressable portion based on company's product-market fit
+• Consider market maturity and saturation factors
+• TAM Estimate: State USD figure and label as "Top-Down Method"
+• Calculation Steps: Show filtering rationale and addressable % calculations
+• Sources: Industry reports, government statistics, trade association data
+• Assumptions: Document filtering criteria and market definition
+• Sensitivity: Test different market size estimates and filtering criteria
+
+Method 3: Hybrid Analysis 
+Why This Method: Combines customer insights with market validation for convergence
+Uncertainties: Reconciliation methodology, growth rate assumptions
+
+Required Analysis:
+• Cross-reference bottom-up customer data with top-down market trends
+• Identify convergence points and discrepancies between approaches
+• Apply market growth rates and competitive dynamics
+• TAM Estimate: State USD figure and label as "Hybrid Method"
+• Calculation Steps: Show reconciliation methodology
+• Sources: Combined primary and secondary research
+• Assumptions: Document growth rates and competitive scenarios
+• Sensitivity: Test market growth rate variations
+
+Market Capture Analysis
+
+Revenue Translation (3 Scenarios)
+• Conservative: 0.5-2% market share capture
+• Base Case: 2-5% market share capture
+• Optimistic: 5-10% market share capture
+
+Convert market share to revenue using TAM estimates. Provide 3-year and 5-year revenue projections.
+
+Constraints and Enablers
+Constraints: Capital requirements, regulatory barriers, competitive moats, technology limitations
+Enablers: Network effects, switching costs, brand recognition, distribution partnerships
+
+Final Deliverables
+
+1. TAM Range: Reasonable range (e.g., $5-15B) with confidence levels
+2. Methodology Comparison: Table comparing all approaches with pros/cons
+3. Revenue Scenarios: Three scenarios with market share assumptions
+4. Plain English Summary: 2-3 paragraph explanation for non-specialists
+5. Key Assumptions Table: All critical assumptions with sensitivity ranges
+6. Source Bibliography: Complete list with credibility assessment
+
+Excel Output Requirement
+Deliver: TAM_Analysis_[Company].xlsx with:
+• Separate worksheets for each methodology
+• Formula-driven calculations (no hardcoded values)
+• Sensitivity analysis tables with data validation
+• Summary dashboard with key outputs
+• Source references and assumption documentation
+
+Format: Professional report with clear headings, tables, and executive summary suitable for investment committee review.
