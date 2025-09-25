@@ -5,7 +5,7 @@ Configuration file for TAM Qwen Agent
 # OpenRouter API Configuration
 OPENROUTER_CONFIG = {
     "base_url": "https://openrouter.ai/api/v1",
-    "api_key": "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", 
+    "api_key": "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", 
     "timeout": 60,
     "max_tokens": 4000,
     "temperature": 0.7
@@ -14,11 +14,11 @@ OPENROUTER_CONFIG = {
 # Qwen2.5 VL 32B Instruct (Free Model)
 QWEN_MODEL = "qwen/qwen2.5-vl-32b-instruct:free"
 
-# Qwen2.5 VL 32B Configuration (Free Model)
+# Qwen2.5 72B Configuration (Free Model)
 QWEN_CONFIG = {
     "base_url": "https://openrouter.ai/api/v1",
-    "model": "qwen/qwen2.5-vl-32b-instruct:free",
-    "api_key": "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",
+    "model": "qwen/qwen-2.5-72b-instruct:free",
+    "api_key": "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",
     "timeout": 60,
     "max_tokens": 4000,
     "temperature": 0.7

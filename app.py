@@ -83,7 +83,7 @@ async def test_single_prompt(
             asyncio.get_event_loop().run_in_executor(
                 None, agent.test_prompt, company_context
             ),
-            timeout=60  # 1 minute timeout
+            timeout=120  # 2 minute timeout
         )
         
         return JSONResponse({
@@ -131,7 +131,7 @@ async def test_dcf_prompt(
             asyncio.get_event_loop().run_in_executor(
                 None, dcf_agent.test_prompt, company_context
             ),
-            timeout=90  # 1.5 minute timeout for DCF analysis
+            timeout=180  # 3 minute timeout for DCF analysis
         )
         
         return JSONResponse({
